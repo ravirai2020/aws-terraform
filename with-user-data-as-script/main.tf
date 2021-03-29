@@ -63,9 +63,9 @@ resource "aws_security_group" "my-first-sg" {
   }
   egress {
     description = "Allow All"
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -78,8 +78,8 @@ resource "aws_instance" "my-first-instance" {
   vpc_security_group_ids = [aws_security_group.my-first-sg.id]
   subnet_id              = aws_subnet.my-first-subnet.id
   #associate_public_ip_address = "true"
-  user_data = "${file("template/index.sh")}"
-  }
+  user_data = file("template/index.sh")
+}
 
 resource "aws_volume_attachment" "ebs_att" {
   device_name = "/dev/sdb"
@@ -87,6 +87,6 @@ resource "aws_volume_attachment" "ebs_att" {
   instance_id = aws_instance.my-first-instance.id
 }
 
-output "ip"{
-  value = "${aws_instance.my-first-instance.public_ip}"
+output "ip" {
+  value = aws_instance.my-first-instance.public_ip
 }
