@@ -1,6 +1,10 @@
 resource "aws_autoscaling_group" "my-asg"{
   name = var.ASG_NAME
-  launch_configuration = aws_launch_configuration.my-config.name
+  #launch_configuration = aws_launch_configuration.my-config.name
+  launch_template{
+    name = aws_launch_template.my-template.name
+    version = "latest"
+  }
   vpc_zone_identifier = [aws_subnet.my-ecs-subnet.id,aws_subnet.my-ecs-subnet-1.id]
   target_group_arns = [aws_lb_target_group.target-group.arn]
   health_check_type = "ELB"
