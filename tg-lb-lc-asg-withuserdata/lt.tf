@@ -3,7 +3,8 @@ resource "aws_launch_template" "my-template"{
   image_id = var.LT_AMI
   instance_type = var.LT_INSTANCE_TYPE
   key_name = "AWSKey"
-  #vpc_security_group_ids = [aws_security_group.my-ecs-sg.id]
+  user_data = filebase64("template/index.sh")
+  vpc_security_group_ids = [aws_security_group.my-ecs-sg.id]
   iam_instance_profile {
     name = aws_iam_instance_profile.role-instance-profile.name
   }
@@ -22,12 +23,12 @@ resource "aws_launch_template" "my-template"{
       Name = "terraform-ec2"
     }
   }
-  network_interfaces{
+  #network_interfaces{
   #  associate_public_ip_address = "true"
   #  delete_on_termination = "true"
-    security_groups = [aws_security_group.my-ecs-sg.id]
-    subnet_id = aws_subnet.my-ecs-subnet.id
-  }
+  #  security_groups = [aws_security_group.my-ecs-sg.id]
+  #  subnet_id = aws_subnet.my-ecs-subnet.id
+  #}
 
 }
 

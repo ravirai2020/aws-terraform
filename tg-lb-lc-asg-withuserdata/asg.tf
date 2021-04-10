@@ -3,7 +3,7 @@ resource "aws_autoscaling_group" "my-asg"{
   #launch_configuration = aws_launch_configuration.my-config.name
   launch_template{
     name = aws_launch_template.my-template.name
-    version = "latest"
+    version = "$Latest"
   }
   vpc_zone_identifier = [aws_subnet.my-ecs-subnet.id,aws_subnet.my-ecs-subnet-1.id]
   target_group_arns = [aws_lb_target_group.target-group.arn]
@@ -11,6 +11,9 @@ resource "aws_autoscaling_group" "my-asg"{
   desired_capacity = var.DESIRED_CAPACITY
   min_size = var.MIN_SIZE
   max_size = var.MAX_SIZE
+  lifecycle{
+    create_before_destroy = true
+  }
   tag{
     key = "terraform-asg"
     value = "testing"
