@@ -18,7 +18,7 @@ It outputs following details-
 3. EFS dns name
 4. Launch Template id
 5. Auto Scaling Group id
-6. Auto Scaling Group associated subnet id(same as 5)
+6. Auto Scaling Group associated subnet id(same as 2)
 7. Application Load Balancer dns name
 
 Jenkins will be accessible through load balancer dns name. User data file installs relevant packages ,mounts EFS share on /var/lib/jenkins directory and start jenkins on EC2 instance.
