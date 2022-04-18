@@ -22,3 +22,5 @@ It outputs following details-
 7. Application Load Balancer dns name
 
 Jenkins will be accessible through load balancer dns name. User data file installs relevant packages ,mounts EFS share on /var/lib/jenkins directory and start jenkins on EC2 instance.
+
+NOTE: not suggested for production as it is
